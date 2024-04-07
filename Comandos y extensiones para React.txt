@@ -1,0 +1,4 @@
+Extension visual code ruuner
+
+Comandos para react
+npm init react-app firstapp
