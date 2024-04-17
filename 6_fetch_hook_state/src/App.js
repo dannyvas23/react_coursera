@@ -1,5 +1,6 @@
 import React from "react";
-
+import App_con_HOC from "./App_con_HOC"
+import App_con_HOC_tarea from "./App_con_HOC_tarea"
 
 const AppFetch = () => {
   //APP FETCH
@@ -257,6 +258,16 @@ const App_cloneElement_childrenMap_Ej2= ()  => {
 }
 
 
+const App_test = () => {
+  return (
+    <div>
+      <a href="https://littlelemon.com" className="App-link">
+      Little Green Restaurant
+      </a>
+    </div>
+  )
+}
+
 
 function App() {
   return (
@@ -272,8 +283,14 @@ function App() {
      <App_crear_hook></App_crear_hook>
      <br></br>
       <App_cloneElement_childrenMap></App_cloneElement_childrenMap>
-     <br></br>
+      <br></br>
       <App_cloneElement_childrenMap_Ej2></App_cloneElement_childrenMap_Ej2>
+      <br></br>
+      <App_con_HOC></App_con_HOC>
+      <br></br>
+      <App_con_HOC_tarea></App_con_HOC_tarea>
+      <br></br>
+      <App_test></App_test>
    </>
   )
 }
