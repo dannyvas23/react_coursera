@@ -49,6 +49,46 @@ const App = () => {
     console.log("Selected Rows:", selectedRows);
   };
 
+
+
+  const DropdownMenu = ({items}) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+      setIsOpen(!isOpen);
+    }
+
+    return (
+      <div className="dropdown">
+        <button className="dropdown-btn" onClick={toggleDropdown}>
+          ⋮
+        </button>
+        {isOpen && (
+          <div className="dropdown-content show">
+            {items.map((item, index) => (
+              <a href="#" key={index}>
+                {item.label}
+                {item.hasSubMenu && <span style={{ color: 'blue' }}> ▼</span>}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+
+  }
+
+  const menuItems = [
+    { label: 'Download' },
+    { label: 'Delete' },
+    { label: 'Rename' },
+    { label: 'Copy to' },
+    { label: 'Move to' },
+    { label: 'Copy link' },
+    { label: 'Folder Color', hasSubMenu: true },
+    { label: 'Permissions' },
+  ];
+    
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -81,13 +121,41 @@ const App = () => {
                 </td>
                 <td>{row.usuario}</td>
                 <td>{row.edad}</td>
-                <td>{row.telefono}</td>
+                {/* <td>{row.telefono} </td> */}
+                <td><DropdownMenu items={menuItems}></DropdownMenu></td>
+
               </tr>
             ))}
           </tbody>
         </table>
         <button type="submit">Enviar</button>
       </form>
+
+      <br />
+      <br />
+      <br />
+
+      {/* <div className="dropdown">
+        <button className="dropdown-btn" onClick={toggleDropdown}>
+          ⋮
+        </button>
+        {isOpen && (
+          <div className="dropdown-content show">
+            <a href="#">Download</a>
+            <a href="#">Delete</a>
+            <a href="#">Rename</a>
+            <a href="#">Copy to</a>
+            <a href="#">Move to</a>
+            <a href="#">Copy link</a>
+            <a href="#">
+              Folder Color <span style={{ color: 'blue' }}>Reset</span>
+            </a>
+            <a href="#">Permissions</a>
+          </div>
+        )}
+      </div> */}
+
+
     </div>
   );
 };
