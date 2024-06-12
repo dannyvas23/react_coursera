@@ -88,6 +88,12 @@ const App = () => {
     { label: 'Folder Color', hasSubMenu: true },
     { label: 'Permissions' },
   ];
+
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
     
   return (
     <div>
@@ -154,6 +160,17 @@ const App = () => {
           </div>
         )}
       </div> */}
+
+      <div>
+        <button onClick={toggleVisibility}>
+          {isVisible ? 'Ocultar' : 'Mostrar'}
+        </button>
+        <div className={`sliding-div ${isVisible ? 'visible' : 'hidden'}`}>
+          Este es el contenido del div.
+        </div>
+
+
+      </div>
 
 
     </div>

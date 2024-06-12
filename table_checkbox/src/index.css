@@ -59,3 +59,23 @@ code {
 .dropdown .dropdown-content.show {
   display: block;
 }
+
+.sliding-div {
+  width: 300px;
+  height: 200px;
+  background-color: lightblue;
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  position: relative; /* Para animar el desplazamiento */
+  top: 50px; /* Ajusta según sea necesario */
+  opacity: 1;
+}
+
+.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.hidden {
+  transform: translateY(-500%); /* Desplaza el div completamente hacia un costado */
+  opacity: 0;
+}
