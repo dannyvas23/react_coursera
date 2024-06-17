@@ -10,6 +10,7 @@ const App = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     setAllSelected(selectedRows.length === data.length);
@@ -49,9 +50,13 @@ const App = () => {
     console.log("Selected Rows:", selectedRows);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit(event);
+    }
+  };
 
-
-  const DropdownMenu = ({items}) => {
+  const DropdownMenu = ({ items }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -94,15 +99,42 @@ const App = () => {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
-    
+
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      /*if (event.ctrlKey) {
+        console.log("HOLA");
+      }*/
+      if (event.ctrlKey && event.key === '1') {
+        event.preventDefault();
+        document.getElementById('input1').focus();
+      }
+     
+    };
+
+    // Agregar el evento keydown
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Limpiar el evento keydown
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  
+
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>
           <input
+          id="input1"
             type="checkbox"
             checked={allSelected}
             onChange={handleSelectAllCheckboxChange}
+            tabIndex="1"
           />
           Seleccionar todo
         </label>
@@ -134,7 +166,16 @@ const App = () => {
             ))}
           </tbody>
         </table>
-        <button type="submit">Enviar</button>
+
+        <a href="https://www.freecodecamp.org/espanol/news/lista-de-codigos-de-teclas-en-javascript/" target="_blank">ATAJOS TECLADO</a><br/>
+        <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+            required
+          />
+        <button type="submit" tabIndex="2">Enviar</button>
       </form>
 
       <br />
