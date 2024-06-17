@@ -15,6 +15,30 @@ const App = () => {
     setAllSelected(selectedRows.length === data.length);
   }, [selectedRows]);
 
+  useEffect(() => {
+    //const ingresoNeto = ((datosFinancieros.montoIngresos - datosFinancieros.montoEgresos - datosFinancieros.montoGastosFinancieros + Number(datosFinancieros.montoRestaGstFinanciero)))
+    const ingresoNeto = ((2000 - 1000 - 300 + 0))
+
+    const valorCP = ingresoNeto * 0.4; //TODO: valor temporal
+    const taza = 0.167;
+    const plazo = 12;
+    //const tazaVsPlazo = Number((taza / plazo).toFixed(2));
+    const tazaVsPlazo = (taza / plazo);
+   
+    
+   
+    const numerador = (Math.pow(1 + tazaVsPlazo, plazo) - 1);
+    const denominador = (tazaVsPlazo * (Math.pow(1 + tazaVsPlazo, plazo)));
+    const nuevoCupoSugerido = valorCP *(numerador / denominador);
+   
+    console.log(`NETO ${ingresoNeto}, cp ${valorCP}, tazaPla ${tazaVsPlazo}, nuevoCupo ${nuevoCupoSugerido}`);
+   
+    const todo = valorCP * ((Math.pow(1 + tazaVsPlazo, plazo) - 1) / (tazaVsPlazo * (Math.pow(1 + tazaVsPlazo, plazo))));
+   
+    console.log(`Num ${numerador}, Den ${denominador}, todo ${todo}`);
+
+  }, []);
+
   const toggleSelectAll = () => {
     setSelectAll(!selectAll);
     if (!selectAll) {
@@ -94,6 +118,7 @@ const App = () => {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  
     
   return (
     <div>
