@@ -1,0 +1,32 @@
+
+----- PERMISOS USUARIOS A SISTEMAS
+select  spu_fk_sistema,usu_login,usu_password, usu_vigencia, per_id, per_nombre, spu_fk_horario
+from meg_sistemas..sis_per_sis_usu, meg_sistemas..sis_perfiles, meg_sistemas..sis_usuarios
+where usu_id = spu_fk_usuario 
+and spu_fk_perfil = per_id 
+and spu_fk_sistema = 105 --Tarjetas de credito
+
+
+
+---- FUNCIONALIDADES POR SISTEMA
+select top 10 fun_id,fun_fk_padre,fun_nombre,fun_tipo,fun_url,fun_descripcion,fun_fk_sistema, sis_nombre
+from meg_sistemas..sis_funcionalidades, meg_sistemas..sis_sistemas
+where fun_fk_sistema = sis_id
+and sis_id = 105
+
+
+----- FUNCIONALIDADES POR PERFIL Y SISTEMAS
+select top 10 prm_fk_funcionalidad, fun_id, fun_nombre, prm_fk_perfil, per_id, per_nombre, sis_nombre  
+from meg_sistemas..sis_permisos, meg_sistemas..sis_funcionalidades, meg_sistemas..sis_perfiles, meg_sistemas..sis_sistemas
+where  prm_fk_funcionalidad = fun_id
+and fun_fk_sistema = sis_id
+and prm_fk_perfil = per_id
+and prm_fk_perfil in (36,44)
+and sis_id = 105
+
+
+MANUAL 
+--> Gestionar tarjetas Bulk
+
+
+

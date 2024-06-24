@@ -1,0 +1,50 @@
+--Entrar a los logs docker
+docker exec -ti 300f0a55418a /bin/bash
+docker exec -it 59b547d1e867 bash
+docker ps | grep 2080 --> Contenedores en ejecución en el puerto específico
+
+
+--WebServices 62
+ssh -p22 usrdesmegonline@192.168.55.62
+Pass: UsrMeg2022
+
+--Interfaces & ApiGateway
+ssh -p22 usrdesintfmeg@192.168.55.63
+Pass: UsrInt*123
+
+
+
+docker build -t ws_cuenta_linea:1.0.0 --no-cache .
+
+
+docker image prune -a
+
+docker image prune -a -f
+
+					
+docker port $(docker ps -lq) | cut -d ":" -f 2 | sort -n | tail -1
+docker ps -q | xargs -I {} docker port {} | grep 'PUERTO'
+
+
+
+docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"
+docker container ls -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"
+
+
+----------------------------------------------------------------------------------------
+-------------------- LISTAR ULTIMOS LOGS
+----------------------------------------------------------------------------------------
+docker logs --tail 100 6460c148252e
+
+----------------------------------------------------------------------------------------
+-------------------- ACCEDER A UN ContenedOR
+----------------------------------------------------------------------------------------
+docker exec -ti 2f346435e608  /bin/bash
+apt-get update
+apt-get upgrade
+apt-get install nano
+
+
+docker restart 2f346435e608  
+
+

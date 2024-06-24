@@ -1,0 +1,193 @@
+---------------------------------
+---------IPS y configuraciones
+---------------------------------
+
+- ServiciosMego
+- wsRecaudaciones
+- servicios.mego 2.21:8040 	--transacciones controladas
+- wsrecaudaciones 1.10:8081 --transacciones controladas
+
+wsRecaudacionesMovil controladas megomovil
+
+
+
+Por recordar que el ws_alfresco y wsSolicitudCredito se encuentran publicados el 2.21 y no en el 1.10. 
+Solo el wssistemas se encuenta ya en el 1.10.
+ _______________________________________________________________
+|						|										|
+|	Referencias PROD 	|			DNS PROD				   	|
+|_______________________|______________________________________	|
+|	195.160.2.21		|	srvaplweb.coopmego.corp			  	|	
+|	195.160.2.40		|	srvwebint.coopmego.corp				|
+|	195.160.1.10 		|	webserverext.coopmego.corp:4070		|
+|______________________________________________________________	|
+|						|										|
+|	Referencias DEV 	|		DNS DEV							|
+|_______________________|_______________________________________|
+|	192.168.55.14:7013	|	srvpruebasapl.coopmego.corp			|
+|	192.168.55.53:7013	|	srvdesapls.coopmego.corp			|
+|_______________________|_______________________________________|
+|						|										|
+|	RRefrencias QA		|		DNS QA							|		
+|_______________________|_______________________________________|	
+|	192.168.55.22:7013	|	srvprbaplw2016.coopmego.corp		|
+|						|										|
+|_______________________|_______________________________________|
+|																|	
+|	Simulador DMZ				192.168.55.37					|
+|_______________________________________________________________|
+
+
+
+_______________________________________________________________________________________________________________________________________________
+									
+									Referencias ProducciÃ³n
+_______________________________________________________________________________________________________________________________________________
+
+	Sistema 						Servidor		Puerto				Referencia
+_______________________________________________________________________________________________________________________________________________
+
+	WCF								1.10			4070				http://webserverext.coopmego.corp:4070/ServerDalWcf/ServicioDAL.svc
+	
+	WCF MOGO						1.10			4070				http://webserverext.coopmego.corp:4070/ServerDalMongo/ServicioDALMongo.svc
+
+	wsSistemas 						1.10			4070				http://webserverext.coopmego.corp:4070/wsSistemas/srvSistemas.asmx
+																		
+	ws_alfresco_rest				1.10			4070				http://webserverext.coopmego.corp:4070/ws_alfresco_rest/api/documento/get_documento
+																		
+	ws_alfresco						1.10			4070				http://webserverext.coopmego.corp:4070/ws_alfresco/srv_archivo.asmx
+
+	wsSistemas						2.21			-					http://srvaplweb.coopmego.corp/wssistemas/srvSistemas.asmx
+
+	ws_alfresco						2.21			-					http://srvaplweb.coopmego.corp/ws_alfresco/srv_archivo.asmx
+
+	wsSolicitudCredito				2.21			-					http://srvaplweb.coopmego.corp/wsSolicitudCredito/srvScore.asmx
+
+__________________________________________________________________________________________________________________________________________________
+
+
+
+__________________________________________________________________________________________________________________________________________________
+
+									Referencia Desarrollo
+__________________________________________________________________________________________________________________________________________________																														   	
+
+	Sistema 						Servidor		Puerto				Referencia
+__________________________________________________________________________________________________________________________________________________
+
+	WCF								55.53			-					http://srvdesapls.coopmego.corp/ServerDalWcf/ServicioDAL.svc
+	
+	WCF	MOGO						55.53			-					http://srvdesapls.coopmego.corp/ServerDalMongo/ServicioDALMongo.svc
+
+	wsSistemas						55.53			-					http://srvdesapls.coopmego.corp/wssistemas/srvSistemas.asmx
+	
+																		http://srvdesapls.coopmego.corp/wsSistemas/srvSistemas.asmx
+	
+	ws_alfresco						55.53			-					http://srvdesapls.coopmego.corp/ws_alfresco/srv_archivo.asmx
+	
+*	wsSolicitudCredito				55.53			-					http://srvdesapls.coopmego.corp/wsSolicitudCredito/srvScore.asmx
+
+___________________________________________________________________________________________________________________________________________________
+
+
+
+
+___________________________________________________________________________________________________________________________________________________
+					
+									UTILES FRONT CONVENIOS
+___________________________________________________________________________________________________________________________________________________
+
+PRODUCCION: http://webserverext.coopmego.corp:4070
+
+DESARROLLO: http://srvdesapls.coopmego.corp
+
+Con esto se puede identificar referncias que se deben cambiar al 1.10 en PRODUCCION
+___________________________________________________________________________________________________________________________________________________
+
+PRODUCCION: http://srvaplweb.coopmego.corp
+
+DESARROLLO: http://192.168.55.53
+
+Con esto se identifica todas las referncias que se deben cambiar al 2.21 en PRODUCCION
+
+___________________________________________________________________________________________________________________________________________________
+
+srvprbaplw2016.coopmego.corp
+http://srvprbaplw2016.coopmego.corp/wssistemas/srvSistemas.asmx
+
+http://195.160.2.21/ServerDalWcf/ServicioDAL.svc	
+
+2312.3901
+
+
+http://srvdesapls.coopmego.corp/ServerDalWcf/ServicioDAL.svc
+
+
+
+______________________________________________________________________________________
+				BASES POSTGRESQL
+______________________________________________________________________________________
+DESARROLLO -- >192.168.55.64
+
+
+______________________________________________________________________________________
+				BASES SQL SERVER
+______________________________________________________________________________________
+
+prosupplysw2.database.windows.net
+Autehtication: SQL Server autenticathion
+Usuairo: DatosBI_MEGO
+Pass: kvrlgjUXFhRNsfCIVdRnxlkrn.
+
+
+______________________________________________________________________________________
+				JENKINS
+______________________________________________________________________________________
+
+http://192.168.60.80:8080/login?from=%2F
+Usuario: userdev
+Pass:Clave.10
+
+
+----------------------------------------------------------------------------------------
+-- Acceso a apigateways desarrollo 				--> 192.168.55.65
+----------------------------------------------------------------------------------------
+IP: 192.168.55.65
+ssh: 22
+User: usrdesapigw
+Pass: UsrApigw*2024
+
+ssh -p22 usrdesapigw@192.168.55.65
+
+
+----------------------------------------------------------------------------------------
+-- Acceso a Interfaces y Frontales desarrollo  	--> 197.168.1.17
+----------------------------------------------------------------------------------------
+ssh -p22 usrdesintfmeg@197.168.1.17 - UsrInt*123
+--INTERFACES host: ssh -p22 usrdesintfmeg@192.168.55.63 password: UsrInt*123
+
+
+
+----------------------------------------------------------------------------------------
+-- Acceso a webServices 						--> 192.168.55.62
+----------------------------------------------------------------------------------------
+ssh -p22 usrdesmegonline@192.168.55.62 - UsrMeg2022
+
+
+
+
+
+----------------------------------------------------------------------------------------
+-- CAMBIO DE SERVIDOR A DESPLEGAR 
+----------------------------------------------------------------------------------------
+
+-- Pipeline JenkinsfileDev
+pipeline {
+    agent {
+        node {
+            label 'apigateway-server-development'
+        }
+		
+
+
+
