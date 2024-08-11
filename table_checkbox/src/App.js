@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FiniteScrollHorizontal from "./FiniteScrollHorizontal";
 
 const data = [
   { id: 1, usuario: "Usuario 1", edad: 25, telefono: "123456789" },
@@ -97,7 +98,7 @@ const App = () => {
             {items.map((item, index) => (
               <a href="#" key={index}>
                 {item.label}
-                {item.hasSubMenu && <span style={{ color: 'blue' }}> ▼</span>}
+                {item.hasSubMenu && <span style={{ color: 'green' }}> ▼</span>}
               </a>
             ))}
           </div>
@@ -206,25 +207,7 @@ const App = () => {
       <br />
       <br />
 
-      {/* <div className="dropdown">
-        <button className="dropdown-btn" onClick={toggleDropdown}>
-          ⋮
-        </button>
-        {isOpen && (
-          <div className="dropdown-content show">
-            <a href="#">Download</a>
-            <a href="#">Delete</a>
-            <a href="#">Rename</a>
-            <a href="#">Copy to</a>
-            <a href="#">Move to</a>
-            <a href="#">Copy link</a>
-            <a href="#">
-              Folder Color <span style={{ color: 'blue' }}>Reset</span>
-            </a>
-            <a href="#">Permissions</a>
-          </div>
-        )}
-      </div> */}
+
 
       <div>
         <button onClick={toggleVisibility}>
@@ -233,9 +216,17 @@ const App = () => {
         <div className={`sliding-div ${isVisible ? 'visible' : 'hidden'}`}>
           Este es el contenido del div.
         </div>
-
-
       </div>
+
+
+      <br />
+      <br />
+      <br />
+
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignContent: "center", width: "100%"}}>
+            <FiniteScrollHorizontal/>
+            </div>
+      
 
 
     </div>
