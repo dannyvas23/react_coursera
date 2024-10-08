@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FiniteScrollHorizontal from "./FiniteScrollHorizontal";
+import TableMui from "./TableMui";
 
 const data = [
   { id: 1, usuario: "Usuario 1", edad: 25, telefono: "123456789" },
@@ -26,17 +27,17 @@ const App = () => {
     const plazo = 12;
     //const tazaVsPlazo = Number((taza / plazo).toFixed(2));
     const tazaVsPlazo = (taza / plazo);
-   
-    
-   
+
+
+
     const numerador = (Math.pow(1 + tazaVsPlazo, plazo) - 1);
     const denominador = (tazaVsPlazo * (Math.pow(1 + tazaVsPlazo, plazo)));
-    const nuevoCupoSugerido = valorCP *(numerador / denominador);
-   
+    const nuevoCupoSugerido = valorCP * (numerador / denominador);
+
     console.log(`NETO ${ingresoNeto}, cp ${valorCP}, tazaPla ${tazaVsPlazo}, nuevoCupo ${nuevoCupoSugerido}`);
-   
+
     const todo = valorCP * ((Math.pow(1 + tazaVsPlazo, plazo) - 1) / (tazaVsPlazo * (Math.pow(1 + tazaVsPlazo, plazo))));
-   
+
     console.log(`Num ${numerador}, Den ${denominador}, todo ${todo}`);
 
   }, []);
@@ -135,7 +136,7 @@ const App = () => {
         event.preventDefault();
         document.getElementById('input1').focus();
       }
-     
+
     };
 
     // Agregar el evento keydown
@@ -147,7 +148,7 @@ const App = () => {
     };
   }, []);
 
-  
+
 
 
   return (
@@ -155,7 +156,7 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         <label>
           <input
-          id="input1"
+            id="input1"
             type="checkbox"
             checked={allSelected}
             onChange={handleSelectAllCheckboxChange}
@@ -192,14 +193,14 @@ const App = () => {
           </tbody>
         </table>
 
-        <a href="https://www.freecodecamp.org/espanol/news/lista-de-codigos-de-teclas-en-javascript/" target="_blank">ATAJOS TECLADO</a><br/>
+        <a href="https://www.freecodecamp.org/espanol/news/lista-de-codigos-de-teclas-en-javascript/" target="_blank">ATAJOS TECLADO</a><br />
         <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={handleKeyDown}
-            required
-          />
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handleKeyDown}
+          required
+        />
         <button type="submit" tabIndex="2">Enviar</button>
       </form>
 
@@ -223,11 +224,15 @@ const App = () => {
       <br />
       <br />
 
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignContent: "center", width: "100%"}}>
-            <FiniteScrollHorizontal/>
-            </div>
-      
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: "center", width: "100%" }}>
+        <FiniteScrollHorizontal />
+      </div>
 
+
+      <br />
+      <br />
+
+            <TableMui></TableMui>
 
     </div>
   );
