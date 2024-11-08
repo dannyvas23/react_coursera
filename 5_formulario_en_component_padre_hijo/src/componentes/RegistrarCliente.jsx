@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PageMuiDataTable from "./PageMuiDataTable";
 
 const RegistroCliente = (props) => {
     //Datos del cliente

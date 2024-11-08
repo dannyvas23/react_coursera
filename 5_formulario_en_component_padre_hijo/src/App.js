@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RegistroCliente from "./componentes/RegistrarCliente";
+import PageMuiDataTable from "./componentes/PageMuiDataTable";
 
 function GoalForm(props) {
   const [formData, setFormData] = React.useState({ goal: "", by: "" });
@@ -16,6 +17,12 @@ function GoalForm(props) {
 
   return (
     <>
+
+      <div style={{ width: "95%", display: "flex", justifyContent: "center" }}>
+        
+          <PageMuiDataTable></PageMuiDataTable>
+       
+      </div>
       <h1>My Little Lemon Goals</h1>
       <form onSubmit={submitHandler}>
         <input type="text" name="goal" placeholder="Goal" value={formData.goal} onChange={changeHandler} />
@@ -69,7 +76,7 @@ export default function App() {
     celularCliente: "",
     cedula: "",
   });
-  
+
 
   const datosIngresadosHandler = (datosRetorno) => {
     setNombres(datosRetorno.nombres)
@@ -80,55 +87,55 @@ export default function App() {
 
   }
 
-const consulta = () => {
-  const url = 'https://randomuser.me/api/';
+  const consulta = () => {
+    const url = 'https://randomuser.me/api/';
 
-  // Hacer la solicitud GET
-   fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.results[0].name.first)
-      setNombres(data.results[0].name.first);
-      setApellidoPaterno(data.results[0].name.last);
-      setApellidoMaterno(`- ${data.results[0].name.last}`);
-      setCelular(data.results[0].location.street.number);
-      setDocumento(data.results[0].location.street.name);
-    })
+    // Hacer la solicitud GET
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.results[0].name.first)
+        setNombres(data.results[0].name.first);
+        setApellidoPaterno(data.results[0].name.last);
+        setApellidoMaterno(`- ${data.results[0].name.last}`);
+        setCelular(data.results[0].location.street.number);
+        setDocumento(data.results[0].location.street.name);
+      })
 
-}
-/*
-  useEffect(()=> {
-    consulta();      
-  },[])
-*/
+  }
+  /*
+    useEffect(()=> {
+      consulta();      
+    },[])
+  */
 
-  useEffect(()=> {
-    if(step === 1){
+  useEffect(() => {
+    if (step === 1) {
       setNombres("");
       setApellidoPaterno("");
       setApellidoMaterno("");
       setCelular("");
       setDocumento("");
     }
-    if(step === 0){
+    if (step === 0) {
       consulta();
     }
-      
-  },[step])
+
+  }, [step])
 
 
 
   useEffect(() => {
     let data = {
-        nombres: nombres,
-        apellidoPaterno: apellidoPaterno,
-        apellidoMaterno: apellidoMaterno,
-        celularCliente: celular,
-        cedula: documento,
+      nombres: nombres,
+      apellidoPaterno: apellidoPaterno,
+      apellidoMaterno: apellidoMaterno,
+      celularCliente: celular,
+      cedula: documento,
     }
     setObjetoDatosGenerales(data)
 
-}, [celular, documento, nombres, apellidoPaterno, apellidoMaterno])
+  }, [celular, documento, nombres, apellidoPaterno, apellidoMaterno])
 
 
   return (
@@ -141,48 +148,48 @@ const consulta = () => {
 
       {step === 0 &&
         <div>
-            <h2>PRUEBA STEP 0</h2>
-            <h2>PRUEBA STEP 0</h2>
-            <h2>PRUEBA STEP 0</h2>
-            <h2>PRUEBA STEP 0</h2>
-            <h2>PRUEBA STEP 0</h2>
-            <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
+          <h2>PRUEBA STEP 0</h2>
         </div>
-      
+
       }
 
       {step === 1 &&
 
         <div>
           <h2>PRUEBA STEP 1</h2>
-            <h2>PRUEBA STEP 1</h2>
-            <h2>PRUEBA STEP 1</h2>
-            <h2>PRUEBA STEP 1</h2>
-            <h2>PRUEBA STEP 1</h2>
-            <h2>PRUEBA STEP 1</h2>
+          <h2>PRUEBA STEP 1</h2>
+          <h2>PRUEBA STEP 1</h2>
+          <h2>PRUEBA STEP 1</h2>
+          <h2>PRUEBA STEP 1</h2>
+          <h2>PRUEBA STEP 1</h2>
         </div>
       }
 
       {step === 2 &&
 
-      <div>
-        <FuncionPadre>
-          <RegistroCliente paso={step}
-            infoSocio={objetoDatosGenerales}
-            datosIngresados={datosIngresadosHandler}
-          ></RegistroCliente>
-        </FuncionPadre>
-      </div>
+        <div>
+          <FuncionPadre>
+            <RegistroCliente paso={step}
+              infoSocio={objetoDatosGenerales}
+              datosIngresados={datosIngresadosHandler}
+            ></RegistroCliente>
+          </FuncionPadre>
+        </div>
       }
 
       <div>
-      <br/><br/>
-      <button onClick={(e) => setStep(0)}>Step0</button>
-      <button onClick={(e) => setStep(1)}>Step1</button>
-      <button onClick={(e) => setStep(2)}>Step2</button>
+        <br /><br />
+        <button onClick={(e) => setStep(0)}>Step0</button>
+        <button onClick={(e) => setStep(1)}>Step1</button>
+        <button onClick={(e) => setStep(2)}>Step2</button>
 
       </div>
-  </div>
+    </div>
   );
 
 }
