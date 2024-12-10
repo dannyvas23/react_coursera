@@ -4,257 +4,170 @@ import { Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { Box, IconButton } from "@mui/material"
 import { BorderColor } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
+import { useState } from 'react';
 
 
 const theme = createTheme({
   components: {
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          borderBottom: 'none',
-          marginLeft: '5px',
-          margingRight: '5px',
-          '&:first-of-type': {
-            borderTopLeftRadius: '20px',
-            borderBottomLeftRadius: '20px',
-          },
-          '&:last-of-type': {
-            borderTopRightRadius: '20px',
-            borderBottomRightRadius: '20px',
-          },
-        },
-        head: {
-          color: '#FFF !important',
-          '& *': {
-            color: '#FFF !important',
-          },
-        },
-      }
-    },
-    MuiTableBody: {
-      styleOverrides: {
-        root: {
-          '& .MuiTableRow-root': {
-            backgroundColor: 'white',
-            borderRadius: '20px',
-            boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-            border: '1px solid #e5e7eb',
-            marginBottom: '0.8rem', // Añade espacio entre las filas
-          },
-          '& .MuiTableCell-body': {
-            fontSize: '0.875rem',
-            padding: '1rem',
-            textAlign: "center"
+      MuiTableCell: {
+          styleOverrides: {
+              root: {
+                  fontFamily: 'Karbon, sans-serif !important',
+                  borderBottom: 'none',
+                  marginLeft: '5px',
+                  margingRight: '5px',
+                  textAlign: "center !important", // Centra el texto
+                  '&:first-of-type': {
+                      borderTopLeftRadius: '7px',
+                      borderBottomLeftRadius: '7px',
+                  },
+                  '&:last-of-type': {
+                      borderTopRightRadius: '7px',
+                      borderBottomRightRadius: '7px',
+                  },
+                  '& .MuiButtonBase-root': {
+                      width: "100%",
+                      marginLeft: "0px",
+                      marginRight: "0px",
+                  },
+              },
+              head: {
+                  color: `#FFF !important`,
+                  textAlign: "center !important", // Centra el texto
+                  '& *': {
+                      color: `#FFF !important`,
+                      fontFamily: 'Karbon-Bold, sans-serif',
+                      textAlign: "center !important", // Centra el texto
+                      fontSize: '17px', // Aquí defines el tamaño de la fuente de los encabezados
+                  },
+              },
           }
-        }
-      }
-    },
-
-
-    
-
-    MUIDataTableHeadCell: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#E6F3FF',
-          fontFamily: 'Karbon-Bold, sans-serif',
-          color: '#FFF',
-          '& .MuiTableSortLabel-root': {
-            display: 'flex',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            color: '#FFF',
-          },
-          '& .MuiTableSortLabel-icon': {
-            color: '#FFF !important',
-          },
-        },
       },
-  },
-    MUIDataTable: {
-      styleOverrides: {
-        root: {
-          boxShadow: 'none',
-          backgroundColor: '#005CD1',          
-          fontFamily: 'Karbon-Bold, sans-serif',
-          
-          borderRadius: '15px',
-        },
-        paper: {
-          boxShadow: 'none',
-          borderRadius: '15px',
-          
-          
-        }
-      }
-    },
-    MuiTableHead: {
-      styleOverrides: {
-        root: {
-          '& .MuiTableCell-head': {
-            color: '#FFF',
-            fontWeight: 600,
-            fontSize: '0.875rem',
-            backgroundColor: '#005CD1',
-            fontFamily: 'Karbon-Bold, sans-serif',
-            textAlign: 'center',
-            
-          },
-        }
-      }
-    },
-    /*MuiTableBody: {
-      styleOverrides: {
-        root: {
-          '& .MuiTableRow-root': {
-            //marginBottom: '0.4rem',
-            backgroundColor: 'white',
-            borderRadius: '15px',
-            boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-            border: '1px solid #e5e7eb',
-          },
-          '& .MuiTableCell-body': {
-            fontSize: '0.875rem',
-            padding: '1rem',
-            
+      MuiTableBody: {
+          styleOverrides: {
+              root: {
+                  '& .MuiTableRow-root': {
+                      backgroundColor: "#A3A3A3",
+                      borderRadius: '7px',
+                      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                      border: `1px solid #A3A3A3`,
+                  },
+                  '& .MuiTableCell-body': {
+                      fontSize: '16px',
+                      padding: '0.8rem', //Separacion texto y bordes de cada fila
+                      textAlign: "center"
+                  },
+                  '& .MuiTypography-root': {
+                      fontSize: '16px',
+                      padding: '0px',
+                      textAlign: "center",
+                      fontFamily: 'Karbon-Bold, sans-serif',
+                  }
+              }
           }
-        }
+      },
+      MUIDataTableHeadCell: {
+          styleOverrides: {
+              root: {
+                  color: "#FFF !important",
+                  '& .MuiTableSortLabel-root': {
+                      color: "#FFF !important",
+                      padding: '0px'
+                  },
+                  '& .MuiTableSortLabel-icon': {
+                      color: "#FFF !important",
+                      padding: '0px'
+                  },
+              },
+          },
+      },
+      MUIDataTable: {
+          styleOverrides: {
+              root: {
+                  boxShadow: 'none',
+                  borderRadius: '15px',
+              },
+              paper: {
+                  boxShadow: 'none',
+                  borderRadius: '15px',
+              }
+          }
+      },
+      MuiTableHead: {
+          styleOverrides: {
+              root: {
+                  '& .MuiTableCell-head': {
+                      color: "#FFF",
+                      backgroundColor: "#005CD1",
+                      textAlign: "center !important", // Centra el texto
+                      '& .MuiTableSortLabel-root': {
+                          color: "#FFF",
+                          justifyContent: 'center', // Asegura que el icono de ordenación esté centrado
+                          position: "relative",
+                          height: '100% !important'
+                      },
+                  }
+              }
+          }
+      },
+      MuiTableBodyRow: {
+          styleOverrides: {
+              root: {
+                  borderRadius: '7px',
+              }
+          }
       }
-    },*/
-    /*MuiTableCell: {
-      styleOverrides: {
-        root: {
-          borderBottom: 'none',
-        }
-      }
-    },*/
-    MuiTableBodyRow: {
-      styleOverrides: {
-        root: {
-          
-          borderRadius: '15px',
-          //borderSpacing: '0 2rem',
-          //borderCollapse: 'separate',
-        }
-      }
-    }
   }
 })
 
+const PageMuiDataTable = ({ titulo = "", columnas, data, msg }) => {
 
-const PageMuiDataTable = (props) => {
+const [columns, setColumns] = useState(columnas);
+const [rows, setRows] = useState(data);
 
-  const columns = [
-    {
-      name: "identificacion",
-      label: "Identificacion",
-      options: {
-        filter: true,
-        sort: true,
-      }
-    },
-    {
-      name: "nombreImpreso",
-      label: "Nombre Impreso",
-      options: {
-        filter: true,
-        sort: true,
-      }
-    },
-    {
-      name: "numeroTarjeta",
-      label: "Número de tarjeta",
-      options: {
-        filter: true,
-        sort: true,
-      }
-    },
-    {
-      name: "tipoTarjeta",
-      label: "Tipo de tarjeta",
-      options: {
-        filter: true,
-        sort: true,
-      }
-    },
-    {
-      name: "estado",
-      label: "Estado 231242143 34324",
-      options: {
-        filter: true,
-        sort: true,
-      }
-    },
-    {
-      name: "acciones",
-      label: "Acciones",
-      options: {
-        filter: false,
-        sort: false,
-        customBodyRender: () => (
-          <Box sx={{ display: 'flex', gap: 1 }}>
-        
-            <span className="text-blue-500 cursor-pointer ml-2">PIN</span>
-          </Box>
-        )
-      }
+const options = {
+  filter: false,
+  search: false,
+  download: false,
+  print: false,
+  viewColumns: false,
+  selectableRows: 'none',
+  pagination: false,
+  elevation: 0,
+  tableBodyHeight: '100%',
+  tableBodyMaxHeight: '100%',
+  setTableProps: () => ({
+    padding: 'none',
+    style: {
+      boxShadow: 'none',
+      textAlign: "center",
+      borderRadius: '15px',
+      borderSpacing: '0 0.5rem',
+      borderCollapse: 'separate',
+      backgroundColor: "#005CD1",
     }
-  ]
-
-  const data = [
-    {
-      identificacion: "115021479",
-      nombreImpreso: "DANIEL PENA BUSTOS",
-      numeroTarjeta: "2330380300031021",
-      tipoTarjeta: "PRINCIPAL",
-      estado: "ACTIVA",
+  }),
+  textLabels: {
+    body: {
+      noMatch: msg ? msg : "Lo sentimos, no existe información para mostrar.",
+      toolTip: "Ordenar",
+      columnHeaderTooltip: column => `Ordenar por ${column.label}`
     },
-    {
-      identificacion: "115021479",
-      nombreImpreso: "KRYSTEL PENA",
-      numeroTarjeta: "2330380300200709",
-      tipoTarjeta: "ADICIONAL",
-      estado: "ACTIVA",
-    }
-  ]
-
-  const options = {
-    filter: false,
-    search: false,
-    download: false,
-    print: false,
-    viewColumns: false,
-    selectableRows: 'none',
-    pagination: false,
-    elevation: 0,
-    tableBodyHeight: '100%',
-    tableBodyMaxHeight: '100%',
-    setTableProps: () => ({
-      padding: 'none',
-      style: {
-        boxShadow: 'none',
-        textAlign: "center",
-        borderRadius: '15px',
-        borderSpacing: '0 0.8rem',
-        borderCollapse: 'separate',
-        backgroundColor: '#F8F8F8', // Cambia 'transparent' al color que desees
-      }
-    })
-  }
+  },
+}
 
 
-  return (
-    <div style={{ padding: "15px", backgroundColor: "yellow" }}>
-    <ThemeProvider theme={theme}>
-      <MUIDataTable
-        title={""}
-        data={data}
-        columns={columns}
-        options={options}
-      />
-    </ThemeProvider>
-    </div>
-  );
+return (
+  <ThemeProvider theme={theme}>
+    <MUIDataTable
+      title={titulo}
+      data={rows}
+      columns={columns}
+      options={options}
+    />
+  </ThemeProvider>
+);
 }
 
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import RegistroCliente from "./componentes/RegistrarCliente";
 import PageMuiDataTable from "./componentes/PageMuiDataTable";
+import { Box } from "@mui/material";
+import ExportPDF from "./componentes/PDFexport";
 
 function GoalForm(props) {
   const [formData, setFormData] = React.useState({ goal: "", by: "" });
@@ -15,14 +17,82 @@ function GoalForm(props) {
     setFormData({ goal: "", by: "" })
   }
 
+  const columns = [
+    {
+      name: "identificacion",
+      label: "Identificacion",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "nombreImpreso",
+      label: "Nombre Impreso",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "numeroTarjeta",
+      label: "Número de tarjeta",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "tipoTarjeta",
+      label: "Tipo de tarjeta",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "estado",
+      label: "Estado 231242143 34324",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "acciones",
+      label: "Acciones",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: () => (
+          <Box sx={{ display: 'flex', gap: 1 }}>
+        
+            <span className="text-blue-500 cursor-pointer ml-2">PIN</span>
+          </Box>
+        )
+      }
+    }
+  ]
+
+  const data = [
+    {
+      identificacion: "115021479",
+      nombreImpreso: "DANIEL PENA BUSTOS",
+      numeroTarjeta: "2330380300031021",
+      tipoTarjeta: "PRINCIPAL",
+      estado: "ACTIVA",
+    },
+    {
+      identificacion: "115021479",
+      nombreImpreso: "KRYSTEL PENA",
+      numeroTarjeta: "2330380300200709",
+      tipoTarjeta: "ADICIONAL",
+      estado: "ACTIVA",
+    }
+  ]
+
   return (
     <>
-
-      <div style={{ width: "95%", display: "flex", justifyContent: "center" }}>
-        
-          <PageMuiDataTable></PageMuiDataTable>
-       
-      </div>
       <h1>My Little Lemon Goals</h1>
       <form onSubmit={submitHandler}>
         <input type="text" name="goal" placeholder="Goal" value={formData.goal} onChange={changeHandler} />
@@ -30,6 +100,16 @@ function GoalForm(props) {
         <input type="text" name="by" placeholder="By..." value={formData.by} onChange={changeHandler} />
         <button>Submit Goal</button>
       </form>
+
+      
+
+      <div style={{ width: "95%", display: "flex", justifyContent: "center" }}>
+        
+          <PageMuiDataTable columnas={columns} data={data}></PageMuiDataTable>
+       
+      </div>
+
+      <ExportPDF></ExportPDF>
     </>
   );
 }
